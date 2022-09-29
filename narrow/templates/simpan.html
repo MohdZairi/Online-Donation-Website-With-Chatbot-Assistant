@@ -1,0 +1,449 @@
+<div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+
+
+    <div class="modal-dialog">
+ 
+ 
+       <div class="modal-content">
+ 
+ 
+          <div class="modal-header">
+ 
+ 
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+ 
+ 
+             <h4 class="modal-title">Ubahsuai Data</h4>
+ 
+ 
+          </div>
+ 
+ 
+          <div class="modal-body">
+ 
+ 
+             <form action="{{ url_for('updatedatatahfiz') }}" method="POST">
+ 
+ 
+                <div class="form-group">
+                    <label>Nama Tahfiz:</label>
+                    <input type="hidden"  name="id" value="{{row.0}}">
+                    <input type="text" class="form-control" name="name" value="{{row.1}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Alamat:</label>
+                    <input type="text" class="form-control" name="address" value="{{row.2}}">
+                </div>
+
+                <div class="form-group">
+                    <label>Emel :</label>
+                    <input type="text" class="form-control" name="email" value="{{row.3}}">
+                 </div>
+
+                <div class="form-group">
+                     <label>No Telefon:</label>
+                     <input type="text" class="form-control" name="phone" value="{{row.4}}">
+                </div>
+   
+                <div class="form-group">
+                     <label>Bank :</label>
+                     <input type="text" class="form-control" name="bank" value="{{row.6}}">
+                </div>
+                 
+                 
+                <div class="form-group">
+                     <label>No Akaun :</label>
+                     <input type="text" class="form-control" name="noacc" value="{{row.7}}">
+                </div>
+
+                <div class="form-group">
+                     <label>Jumlah Derma :</label>
+                     <input type="text" class="form-control" name="donate" value="{{row.8}}">
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">UbahSuai</button>
+                </div>
+ 
+             </form>
+ 
+ 
+          </div>
+ 
+ 
+          <div class="modal-footer">
+
+             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+          </div>
+       </div>
+ 
+ 
+    </div>
+ 
+ 
+ </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+	<title>Online Donation Final Year Project</title>
+	<link rel="shortcut icon" href="/static/images/teacher.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar Start -->
+	<div class="container-fluid nav-bar p-0">
+		<div class="container-lg p-0">
+			<nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
+				<a href="index.html" class="navbar-brand">
+					<h1 class="m-0 text-white display-4"><span class="text-primary">A</span>l- <span class="text-primary">F</span>ajr</h1>
+				</a>
+				<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+					<div class="navbar-nav ml-auto py-0">
+						<a href="admintahfiz.html" class="nav-item nav-link active">Tahfiz</a>
+						<a href="adminngo.html" class="nav-item nav-link">Organisasi</a>
+						<a href="adminshelter.html" class="nav-item nav-link">Rumah Perlidungan</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+   <!-- Page Header Start -->
+   <div class="container-fluid page-header d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5 mb-5">
+		<h1 class="display-4 text-white mb-3 mt-0 mt-lg-5">Tahfiz</h1>
+		<div class="d-inline-flex text-white">
+			<p class="m-0"><a class="text-white" href="">Admin</a></p>
+			<p class="m-0 px-2">/</p>
+			<p class="m-0">Tahfiz</p>
+		</div>
+	</div>
+	<!-- Page Header Start -->
+
+	<!--Flash message-->
+
+	{%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+
+    </div>
+
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+	<!--end flash message-->
+	<!-- Button and Header -->
+	<div>
+		<div class="container-fluid p-0 mb-5">
+			<div class="row">
+				<div class="col md-12">
+					<h4 class="font-weight-bold mb-3">Senarai Tahfiz <button type="button" class="btn btn-success-admin  pull-right" data-toggle="modal" data-target="#myModal">Tambah Data Tahfiz</button></h4>
+					<div id="myModal" class="modal fade" role="dialog">
+
+
+						<div class="modal-dialog">
+					 
+					 
+						   <div class="modal-content">
+					 
+					 
+							  <div class="modal-header">
+					 
+					 
+								 <button type="button" class="close" data-dismiss="modal">&times;</button>
+					 
+					 
+								 <h4 >Sila Masukkan Data Tahfiz</h4>
+					 
+					 
+							  </div>
+					 
+					 
+							  <div class="modal-body">
+					 
+					 
+								 <form action="{{ url_for('insertdatatahfiz') }}" method="POST">
+					 
+					 
+									<div class="form-group">
+					 
+					 
+									   <label>Nama Tahfiz:</label>
+									   <input type="text" class="form-control" name="name" required="1">
+					 
+					 
+									</div>
+					 
+					 
+									 <div class="form-group">
+					 
+					 
+									   <label>Alamat:</label>
+									   <input type="text" class="form-control" name="address" required="1">
+					 
+					 
+									</div>
+					 
+					 
+									<div class="form-group">
+					 
+					 
+									   <label>Emel :</label>
+									   <input type="text" class="form-control" name="email" required="1">
+					 
+					 
+									</div>
+
+									<div class="form-group">
+					 
+					 
+										<label>No Telefon:</label>
+										<input type="text" class="form-control" name="phone" required="1">
+					  
+					  
+									 </div>
+					  
+					  
+									 <div class="form-group">
+					  
+					  
+										<label>Bank :</label>
+										<input type="text" class="form-control" name="bank" required="1">
+					  
+					  
+									 </div>
+									
+									
+									 <div class="form-group">
+					  
+					  
+										<label>No Akaun :</label>
+										<input type="text" class="form-control" name="noacc" required="1">
+					  
+					  
+									 </div>
+
+									 <div class="form-group">
+					  
+					  
+										<label>Jumlah Derma :</label>
+										<input type="text" class="form-control" name="donate" required="1">
+					  
+					  
+									 </div>
+				
+									
+					 
+									<div class="form-group">
+					 
+					 
+									   <button class="btn btn-primary" type="submit">Daftar</button>
+					 
+					 
+									</div>
+					 
+					 
+								 </form>
+					 
+					 
+							  </div>
+					 
+					 
+							  <div class="modal-footer">
+					 
+					 
+								 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+					 
+					 
+							  </div>
+					 
+					 
+						</div>
+					 
+					 
+					</div>
+					 
+					 
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- End Button-->
+
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			font-family: "Raleway", sans-serif;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #4A4A4A;
+			text-align: left;
+
+			}
+	</style>
+	<!--Senarai Tahfiz-->
+    <div >
+            <table> 
+                <thead> 
+                <tr> 
+					<th>ID</th>
+					<th>Tahfiz</th>
+					<th>Alamat</th>
+					<th>No Telefon</th>
+					<th>Nama Bank</th>
+					<th>No Akaun</th>
+					
+					<th>Tindakan</th>
+                    
+                </tr> 
+                </thead> 
+                <tbody> 
+                    {% for row in data %}  
+                        <tr> 
+                            <tr>
+								<td>{{row[0]}}</td>
+								<td>{{row[1]}}</td> 
+								<td>{{row[2]}}</td> 
+								<td>{{row[4]}}</td> 
+								<td>{{row[6]}}</td> 
+								<td>{{row[7]}}</td> 
+								
+						
+								<td>
+								<a href="/updatedatatahfiz" class="btn btn-warning btn-xs" >Edit</a>
+								
+								<a href="/deletedatatahfiz/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+			
+								</td>
+			
+							</tr>
+							
+                        </tr> 
+                    {% endfor %} 
+                </tbody> 
+            </table>                    
+    </div>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-white mt-5 pt-5 px-sm-3 px-md-5">
+		<div class="row pt-5">
+			<div class="col-lg-3 col-md-6 mb-5">
+				<a href="index.html" class="navbar-brand">
+					<h1 class="m-0 text-white display-4"><span class="text-primary">A</span>l- <span class="text-primary">F</span>ajr</h1> 
+				</a>
+				<p>Membantu dan Memudahkan golongan yang memerlukan bantuan</p>
+				<div class="d-flex justify-content-start mt-4">
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://twitter.com/zairy08?t=cqkpiQEygkEhCkcbpmq83w&s=09"><i class="fab fa-twitter"></i></a>
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://www.facebook.com/mohdzairy007"><i class="fab fa-facebook-f"></i></a>
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://wa.me/+60149942572"><i class="fab fa-whatsapp"></i></a>
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://www.instagram.com/_mohdzairy/"><i class="fab fa-instagram"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="font-weight-bold text-primary mb-4">Pautan Pantas</h5>
+				<div class="d-flex flex-column justify-content-start">
+					<a class="text-white mb-2" href="index.html"><i class="fa fa-angle-right text-primary mr-2"></i>Home</a>
+					<a class="text-white mb-2" href="about.html"><i class="fa fa-angle-right text-primary mr-2"></i>Tentang</a>
+					<a class="text-white" href="contact.html"><i class="fa fa-angle-right text-primary mr-2"></i>Hubungi Kami</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="font-weight-bold text-primary mb-4">Pautan Popular</h5>
+				<div class="d-flex flex-column justify-content-start">
+					<a class="text-white mb-2" href="tahfiz.html"><i class="fa fa-angle-right text-primary mr-2"></i>Tahfiz</a>
+					<a class="text-white mb-2" href="organization.html"><i class="fa fa-angle-right text-primary mr-2"></i>Organisasi</a>
+					<a class="text-white mb-2" href="shelter.html"><i class="fa fa-angle-right text-primary mr-2"></i>Rumah Perlindungan</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="font-weight-bold text-primary mb-4">Hubungi Kami</h5>
+				<p>Mohd Zairi Abd Ghani</p>
+				<p><i class="fa fa-map-marker-alt text-primary mr-2"></i>No 36, Kampung Triang Tengah <br>86900, Endau, Johor </p>
+				<p><i class="fa fa-phone-alt text-primary mr-2"></i>+019 5866361</p>
+				<p><i class="fa fa-envelope text-primary mr-2"></i>B031910029@student.utem.edu.my</p>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid py-4 px-sm-3 px-md-5">
+		<p class="m-0 text-center">
+			&copy; <a class="font-weight-semi-bold" href="index.html">Al-Fijr</a>. All Rights Reserved. Designed by
+			<a class="font-weight-semi-bold" href="about.html">Zairy</a>
+		</p>
+	</div>
+
+	<!-- Footer end -->
+
+
+  
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

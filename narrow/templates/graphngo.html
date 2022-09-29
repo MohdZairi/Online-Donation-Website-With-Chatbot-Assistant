@@ -1,0 +1,245 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+	<title>Online Donation Final Year Project</title>
+    <link rel="shortcut icon" href="/static/images/teacher.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js" integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    
+</head>
+
+<body>
+    <!-- Navbar Start -->
+	<div class="container-fluid nav-bar p-0">
+		<div class="container-lg p-0">
+			<nav class="navbar navbar-expand-lg bg-secondary navbar-dark">
+				<a href="index.html" class="navbar-brand">
+					<h1 class="m-0 text-white display-4"><span class="text-primary">A</span>l- <span class="text-primary">F</span>ajr</h1>
+				</a>
+				<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+					<div class="navbar-nav ml-auto py-0">
+						<a href="index.html" class="nav-item nav-link active">Home</a>
+						<a href="about.html" class="nav-item nav-link">Tentang</a>
+						<div class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Menderma</a>
+							<div class="dropdown-menu border-0 rounded-0 m-0">
+								<a href="tahfiz.html" class="dropdown-item">Tahfiz</a>
+								<a href="organization.html" class="dropdown-item">Organisasi</a>
+								<a href="shelter.html" class="dropdown-item">Rumah Perlindungan</a>
+							</div>
+						</div>
+						<a href="contact.html" class="nav-item nav-link">Hubungi Kami</a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+    <!-- Navbar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-tahfiz d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5 mb-5">
+        <h1 class="display-4 text-white mb-3 mt-0 mt-lg-5">Graf Hasil Derma Untuk Organisasi</h1>
+    </div>
+    <!-- Page Header End -->
+    
+    <!-- recomend-->
+    <div class="container-fluid pt-5 pb-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6 text-center mb-5">
+                    <h1 class="mt-2 mb-3">Rekomendasikan</h1>
+                    <h4 class="font-weight-normal text-muted mb-4">Kami menyenaraikan 3 organisasi yang mempunyai nilai derma yang terendah
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div >
+        <center>
+            <table> 
+                <thead> 
+                <tr> 
+                    <th>Nama Organisasi</th> 
+                    <th>Nama Bank</th> 
+                    <th>Nombor Akaun</th>
+                    
+                </tr> 
+                </thead> 
+                <tbody> 
+                    {% for row in data %}  
+                        <tr> 
+                            <td>{{row[1]}}</td> 
+                            <td>{{row[6]}}</td> 
+                            <td>{{row[7]}}</td> 
+                    
+
+                        </tr> 
+                    {% endfor %} 
+                </tbody> 
+            </table> 
+    
+        </center>
+                      
+    </div>
+    <!--end recomend-->
+
+     <!--Graph start-->
+
+     <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Graf</a>
+        <div class="dropdown-menu border-0 rounded-0 m-0">
+            <a href="graphtahfiz.html" class="dropdown-item">Tahfiz</a>
+            <a href="graphngo.html" class="dropdown-item">Organisasi</a>
+            <a href="graphshelter.html" class="dropdown-item">Rumah Perlindungan</a>
+        </div>
+    </div>
+
+    <center>
+        <div class="p-5" style="width: 100%; max-width: 900px;">
+            <canvas id="myChart" max-width="100" max-height="100"></canvas>
+            <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels | safe }},
+                    datasets: [{
+                        label: 'Graf Hasil Derma Untuk Organisasi',
+                        data: {{ values | safe}},
+                        backgroundColor : [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            </script>
+        </div> 
+        
+    </center>
+    <!--Graph end -->
+
+    <center><button onclick="location.href= 'organization.html'" " type="button" class="btn btn-success " >Ayuh Derma</button></h2></center>
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-white mt-5 pt-5 px-sm-3 px-md-5">
+		<div class="row pt-5">
+			<div class="col-lg-3 col-md-6 mb-5">
+				<a href="index.html" class="navbar-brand">
+					<h1 class="m-0 text-white display-4"><span class="text-primary">A</span>l- <span class="text-primary">F</span>ajr</h1>
+				</a>
+				<p>Membantu dan Memudahkan golongan yang memerlukan bantuan</p>
+				<div class="d-flex justify-content-start mt-4">
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://twitter.com/zairy08?t=cqkpiQEygkEhCkcbpmq83w&s=09"><i class="fab fa-twitter"></i></a>
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://www.facebook.com/mohdzairy007"><i class="fab fa-facebook-f"></i></a>
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://wa.me/+60149942572"><i class="fab fa-whatsapp"></i></a>
+					<a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0" style="width: 38px; height: 38px;" href="https://www.instagram.com/_mohdzairy/"><i class="fab fa-instagram"></i></a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="font-weight-bold text-primary mb-4">Pautan Pantas</h5>
+				<div class="d-flex flex-column justify-content-start">
+					<a class="text-white mb-2" href="index.html"><i class="fa fa-angle-right text-primary mr-2"></i>Home</a>
+					<a class="text-white mb-2" href="about.html"><i class="fa fa-angle-right text-primary mr-2"></i>Tentang</a>
+					<a class="text-white" href="contact.html"><i class="fa fa-angle-right text-primary mr-2"></i>Hubungi Kami</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="font-weight-bold text-primary mb-4">Pautan Popular</h5>
+				<div class="d-flex flex-column justify-content-start">
+					<a class="text-white mb-2" href="tahfiz.html"><i class="fa fa-angle-right text-primary mr-2"></i>Tahfiz</a>
+					<a class="text-white mb-2" href="organization.html"><i class="fa fa-angle-right text-primary mr-2"></i>Organisasi</a>
+					<a class="text-white mb-2" href="shelter.html"><i class="fa fa-angle-right text-primary mr-2"></i>Rumah Perlindungan</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 mb-5">
+				<h5 class="font-weight-bold text-primary mb-4">Hubungi Kami</h5>
+				<p>Mohd Zairi Abd Ghani</p>
+				<p><i class="fa fa-map-marker-alt text-primary mr-2"></i>No 36, Kampung Triang Tengah <br>86900, Endau, Johor </p>
+				<p><i class="fa fa-phone-alt text-primary mr-2"></i>+019 5866361</p>
+				<p><i class="fa fa-envelope text-primary mr-2"></i>B031910029@student.utem.edu.my</p>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid py-4 px-sm-3 px-md-5">
+		<p class="m-0 text-center">
+			&copy; <a class="font-weight-semi-bold" href="index.html">Al-Fijr</a>. All Rights Reserved. Designed by
+			<a class="font-weight-semi-bold" href="about.html">Zairy</a>
+		</p>
+	</div>
+
+	<!-- Footer end -->
+
+
+
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/jquery-3.2.1.min"></script>
+    <script src="/static/js/bootstrap2.min.js"></script>
+</body>
+
+</html>
